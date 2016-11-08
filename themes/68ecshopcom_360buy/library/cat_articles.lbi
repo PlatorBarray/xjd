@@ -1,0 +1,7 @@
+<div class="mytim-tabconter">
+<ol>
+<!--{foreach from=$articles item=article_item name=name}-->
+	<li><a target="_blank" href="{$article_item.url}" title="{$article_item.title}">{$article_item.short_title} </a> </li>
+		<!--{/foreach}-->
+		</ol>
+</div>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{$page_title}</title>
+	<meta name="keywords" content="{$keywords}"/>
+	<meta name="description" content="{$description}">
+	<link rel="shortcut icon" href="favicon.ico"/>
+	<style>
+		*{ margin:0; padding:0;}
+		body{ font-size:12px; font-family:"微软雅黑"; color:#666;}
+		img{ border:0;}
+		ul,ol{ list-style:none;}
+		.clear{ clear:both;}
+		a{ text-decoration:none; color:#333;}
+		a:hover{ text-decoration:underline;}
+		.new-footer{position:fixed;z-index:99999999; width:100%; bottom:0; left:0px; padding:20px 0; background:url(Images/new_nav_footer-bj.png);}
+		.new-footer-contr{width:1200px; margin:10px auto; position:relative;}
+		.new-footer-left{ float:left; width:870px;}
+		.new-footer-left ul li{ float:left; width:33.333%;}
+		.new-footer-left ul li img{ float:left; width:230px; height:80px;}
+		.new-footer-left ul li p{ float:left; width:230px; line-height:24px; font-size:16px; color:#fff; margin-top:10px;}
+		.new-footer-right{float:right;width:330px; height:78px;}
+		.new-footer-right img{ float:left; width:330px;}
+		.new-footer-right p{ float:left; margin-top:10px; width:330px; text-align:right;}
+		.new-footer-right .new_footerbtn{ display:inline-block; padding:7px 15px; font-size:14px; background:#ff4200; border-radius:10px; color:#fff;}
+		.new-footer-right b{ display:inline-block; margin-left:10px; font-size:14px; color:#fff; font-weight:normal;}
+		.new-footer-right b a{ color:#ff4200;}
+		.new-guanbi{position:absolute;top:-28px;right:-40px;z-index:11111;cursor:pointer;}
+		.new-guanbi img{width:34px; transition: all 0.4s ease-in 0s;}
+		.new-guanbi img:hover{transform: rotate(360deg);}
+
+	</style>
+
+
+	<link href="themes/68ecshopcom_360buy/css/index/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="themes/68ecshopcom_360buy/css/index.css" />
+	<link href="themes/68ecshopcom_360buy/css/index/index.css" rel="stylesheet" type="text/css" />
+	<link href="themes/68ecshopcom_360buy/css/index/swiper.min.css" rel="stylesheet" type="text/css" />
+	<script src="themes/68ecshopcom_360buy/css/index/js/jquery.1.11.3.js" type="text/javascript"></script>
+	<link href="themes/68ecshopcom_360buy/css/index/mian.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="themes/68ecshopcom_360buy/js/tab.js"></script>
+	<script type="text/javascript" src="themes/68ecshopcom_360buy/js/home_index.js"></script>
+</head>
+<body>
+<!-- Bootstrap -->
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="themes/68ecshopcom_360buy/css/index/js/html5shiv.min.js"></script>
+<script src="themes/68ecshopcom_360buy/css/index/js/respond.min.js"></script>
+<![endif]-->
+<!-- #BeginLibraryItem "/library/page_header_index2.lbi" --><!-- #EndLibraryItem -->
+
+{$index_cateid16_left.image}
+<div class="container-fluid mytim-navbar">
+	<div class="container">
+		<div class="row">
+			<ul>
+				<!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav } -->
+				<li><a  href="{$nav.url}" title="{$nav.name}" >{$nav.name}</a></li>
+				<!-- {/foreach} -->
+				<div style="clear:both;"></div>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container-fluid navbar-menu">
+	<div class="container">
+		<div class="row">
+			<div class="navleft-1 pull-left">
+				<div class="navleft-memu pull-left">
+					<div class="navleft-title">
+						<h2 class="title">全部商品分类</h2>
+					</div>
+					<div class="retail-menu">
+						<ul>
+							<!--{foreach from=get_categories_tree(0) item=cat name=cat0}-->
+							{if $cat.cat_id|@count!=0}
+							{*if $cat.cat_id|@count!=0 and $count_nav|@count<3*}
+								{*maths $count_nav[] arreq $cat.name*}
+								<li>
+									<div class="menu-list-title">
+										<a class="menu-list-link icon0" href="{$cat.url}" target="_blank" title="进入{$cat.name}频道">{$cat.name}</a>
+									</div>
+									<div class="collapse-menu">
+										<div class="menu-list">
+											<!--{foreach from=$cat.cat_id item=child name=namechild}-->
+											{if $smarty.foreach.namechild.index < 4}
+											<dl class="first-item">
+												<a class="menu-subtitle"  title="{$child.name|escape:html}" href="{$child.url}" target="_blank"><dt>{$child.name|escape:html}</dt></a>
+												<!--{foreach from=$child.cat_id item=childer name=childername}-->
+												<dd><a  href="{$childer.url}" title="{$childer.name|escape:html}" class="menu-color " target="_blank" >{$childer.name|escape:html}</a></dd>
+												<!--{/foreach}-->
+											</dl>
+											<!--{/if}-->
+											<!--{/foreach}-->
+										</div>
+										<div class="menu-img">
+											<?php
+			$GLOBALS['smarty']->assign('index_lit_img1',get_advlist('首页幻灯片-小图下',3));
+											?>
+											<!--{foreach from=$index_lit_img1 item=ad name=index_image}-->
+											<a href="{$ad.url}" class="rtb-realese-item" target="_blank" title="{$ad.name}">
+												<img src="{$ad.image}"  alt="{$ad.name}" /></a>
+											<!--{/foreach}-->
+										</div>
+										<div style="clear:both;"></div>
+									</div>
+								</li>
+							{/if}
+							<!--{/foreach}-->
+
+						</ul>
+					</div>
+				</div>
+				<div class="navright-memu pull-right">
+					<div id="banner">
+						<div class="device">
+							<a class="arrow-left" href="#"></a>
+							<a class="arrow-right" href="#"></a>
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<!--{foreach from=$flash name=myflash item=flash}-->
+									<div class="swiper-slide"> <a href="{$flash.url}" target="_blank"><img src="{$flash.src}"></a> </div>
+									<!--{/foreach}-->
+								</div>
+							</div>
+							<div class="pagination"></div>
+						</div>
+					</div>
+					<div class="banner-advertising">
+						<!--{foreach from=$index_lit_img1 item=ad name=index_image}-->
+						<a href="{$ad.url}" class="rtb-realese-item" target="_blank" title="{$ad.name}">
+							<img src="{$ad.image}"  alt="{$ad.name}" /></a>
+						<!--{/foreach}-->
+					</div>
+				</div>
+			</div>
+			<div class="right-sidebar">
+				<!-- #BeginLibraryItem "/library/recommend_right_promotion.lbi" --><!-- #EndLibraryItem -->
+			</div>
+			<div class="navleft-2 pull-right">
+				<!--<div class="navleft-login">
+						<div class="navleft-login-1"> {*<img src="login-logo.png" />*}
+							<span> 欢迎来到商城！ </span> </div>
+						<div class="navleft-login-2" > <a href="" class="register">我是买家</a> <a href="" class="login">我是卖家</a>
+							<div style="clear:both;"></div>
+						</div>
+					</div>-->
+
+				<div class="navleft-tab">
+					<ul id="myTab" class="nav nav-tabs">
+						<li class="active"> <a href="#notice" data-toggle="tab"> 公告 </a> </li>
+						<li><a href="#comprador" data-toggle="tab">买家入口</a></li>
+						<!--<li> <a href="#vendor" data-toggle="tab">卖家入口 </a> </li>-->
+					</ul>
+
+
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade in active" id="notice">
+							<!-- TemplateBeginEditable name="首页主广告右侧公告" -->
+							<!-- #BeginLibraryItem "/library/cat_articles.lbi" --><!-- #EndLibraryItem -->
+							<!-- TemplateEndEditable -->
+						</div>
+						<div class="tab-pane fade" id="comprador">
+							<div class="mytim-tabconter">
+								<div class="tabs-panel">
+									<a href="apply_index.php" title="申请商家入驻；已提交申请，可查看当前审核状态。" class="store-join-btn" target="_blank">&nbsp;</a>
+									<a href="supplier" target="_blank" class="store-join-help">
+										<i class="icon-cog"></i>
+										登录商家管理中心
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid mytim-index-message">
+	<div class="container">
+		<div class="row">
+			<div class="message-title"> <span class="pull-left">文章资讯</span>
+				<!--<p class="pull-right" ><a href="">热门：</a><a href="">菜蔬</a><a href="">母婴</a><a href="">苹果</a><a href="">手机</a><a href="">彩电</a><a href="">家电</a></p>-->
+				<div style="clear:both;"></div>
+			</div>
+			<div class="message-listview">
+				<ul class="pull-left">
+					{foreach from=$article_data item=article_data name=art0}
+						<li><a title="" target="purchase_2447330" href="article.php?id={$article_data.article_id}">•{$article_data.title}
+								<span>{$article_data.add_time}</span> </a></li>
+					{/foreach}
+				</ul>
+				<p class="pull-right"><a href="//www.mytim.cn/vip/nongcaitong"><img width="290" height="198" src="themes/68ecshopcom_360buy/css/index/picture/nongcaitong.jpg"></a></p>
+				<div style="clear:both"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="container">
+		<div class="row">
+			{foreach from=$allcategory item=allcategory key=key name=allcate}
+					<!--{if $allcategory.cat_id|@count neq 0}-->
+				{maths $count_i['index'][] arreq $smarty.foreach.allcate.iteration}
+				{maths $count_i['catename'][] arreq $allcategory.name}
+				{maths $count_i['type_img'][] arreq $allcategory.type_img}
+				<div class="first-floor" id="floor{$smarty.foreach.allcate.iteration}">
+					<div class="floor-title"><span class="pull-left">
+        <b>{$allcategory.name}</b> <i><a href="">热销产品：</a>
+								<!-- {foreach from=$allcategory.cat_id item=childs} -->
+								<!-- {foreach from=get_child_tree_best($GLOBALS['smarty']->_var['childs']['id']) item=child_best name=child_best} -->
+								<!--{if $smarty.foreach.child_best.index < 2}-->
+								<!--{if $child_best.url }-->
+                <a href="{$child_best.url}" target="_blank" title="{$child_best.name|escape:html}">{$child_best.name|escape:html}</a>
+								<!-- {/if}-->
+								<!--{/if}-->
+								<!-- {/foreach} -->
+								<!-- {/foreach} -->
+							</i> </span>
+						<!--<p  class="pull-right">
+							<a title="毛豆" target="_blank" href="https://www.mytim.cn/product/12651" class="active">• 毛 豆</a>
+						</p>-->
+						<div style="clear:both;"></div>
+					</div>
+					<!--分类正式开始-->
+					<div class="floor-conter">
+						{assign var="count_img" value="0"}
+						<!-- {foreach from=$allcategory.cat_id item=firstchild  name=firstchild0} -->
+						<!--{if $smarty.foreach.firstchild0.iteration <= 2}-->
+						<div class="col-xs-6">
+							<div class="floor-conter-img">
+								{foreach from=$allcategory.id|get_index_adimg key=key item=getadimg name=getadimg0}
+									{maths $key addeq 1}
+									{if $smarty.foreach.firstchild0.iteration eq $key}
+								<img src="{$getadimg.img_url}" width="176" height="330">
+									{/if}
+								{/foreach}
+							</div>
+							<div class="floor-conter-listview">
+								<div class="indexlistview-title">{$firstchild.name}</div>
+								<div class="indexlistview-conter">
+									<ul>
+										<!-- {foreach from=$firstchild.cat_id item=firstchild2 key=key1 name=firstchild1} -->
+										{if $key1 mod 2 neq 0}
+											<li><a href="{$firstchild2.url}" target="_blank"  class="active" >{$firstchild2.name}</a></li>
+										{/if}
+										<!-- {/foreach} -->
+									</ul>
+
+									<ol>
+										<!-- {foreach from=$firstchild.cat_id item=firstchild2 key=key1 name=firstchild1} -->
+										{if $key1 mod 2 eq 0}
+											<li><a href="{$firstchild2.url}" target="_blank"  class="active" >{$firstchild2.name}</a></li>
+										{/if}
+										<!-- {/foreach} -->
+									</ol>
+
+								</div>
+							</div>
+							<div style="clear:both;"></div>
+						</div>
+						<!--{/if}-->
+						<!-- {/foreach} -->
+					</div>
+				</div>
+				<!--{/if}-->
+			{/foreach}
+		</div>
+	</div>
+	<div id="leftlei" class="sideGuide">
+		<div class="leftlei-1">
+			<div class="labeleft">
+				<div class="dao">行业<br>分类</div>
+				<div class="dao-1">
+					<ul>
+						{foreach from=$count_i.index key=key item=lefthover}
+							<li><a href="#floor{$lefthover}"><img src="{$count_i.type_img.$key}"></a>
+								<div class="spanleft-{math $selfadd addeq 1}"><a href="#floor{$lefthover}">{$count_i.catename.$key}</a></div></li>
+						{/foreach}
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="Scripts/search.js" type="text/javascript" ></script>
+
+	<script type="text/javascript" src="themes/68ecshopcom_360buy/js/indexPrivate.min.js"></script>
+	<!-- #BeginLibraryItem "/library/right_sidebar.lbi" --><!-- #EndLibraryItem -->
+	<SCRIPT type="text/javascript">
+		$(function () {
+			starCheckMessage();
+
+			initLayout('qb');
+
+			_checkBrowser();
+
+			var sf = $("#searchform"),
+					sq = "";
+			if (sq == "") {
+				sq = $.cookie('jye_search_q');
+			}
+
+
+			$('.search-ques', sf).hover(function () {
+				$('.dropdown-menua', sf).show();
+			}, function () {
+				$('.dropdown-menua', sf).hide();
+			});
+
+			if (sq) {
+				$('a[data-sq=' + sq + ']', sf).click();
+			}
+
+			$(document.body).click(function () {
+				$('.dropdown-menua').css({
+					'display': 'none'
+				});
+			});
+
+			$(".quesborder,.JYE_MATH_SELECTOR").each(function () {
+				try {
+					renderLatex(this);
+				} catch (e) {}
+			});
+		});
+
+		function openLoginUI(u, o, t) {
+			_openLoginUI("math", u, o, t);
+		}
+
+		function openAnalyze(i, t) {
+			_openAnalyze("math", i, t);
+		}
+
+		function _setc(el) {
+			el = $(el);
+
+			var fm = el.closest('form'),
+					sq = el.data('sq'),
+					ph = el.data('ph');
+
+			$('#c', fm).val(sq);
+			$('#qb', fm).prop('placeholder', ph);
+			$('em', fm).text(el.text());
+
+			$('.dropdown-menua', fm).css({
+				'display': 'none'
+			});
+
+			$.cookie('jye_search_q', sq);
+		}
+
+		function _checkBrowser() {
+			try {
+				if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+					var desc = navigator.mimeTypes['application/x-shockwave-flash'].description.toLowerCase();
+					if (desc.indexOf('adobe') > -1 || navigator.appVersion.indexOf('UBrowser') > -1) {
+						$("#borwserWarning").animate({
+							"height": "show"
+						});
+						setTimeout(_closeWarning, 2000);
+						return;
+					}
+					var mimeType = navigator.mimeTypes;
+					for (var i = 0; i < mimeType.length; i++) {
+						if (mimeType[i]['type'].indexOf('sogou') > -1) {
+							$("#borwserWarning").animate({
+								"height": "show"
+							});
+							setTimeout(_closeWarning, 2000);
+							break;
+						}
+					}
+				}
+			} catch (e) {
+				return;
+			}
+		}
+
+		function _closeWarning() {
+			$("#borwserWarning").animate({
+				"height": "hide"
+			});
+		}
+
+		function _rs(el) {
+			el = $(el);
+
+			var u = window.location.href.toLowerCase(),
+					pa = el.data('pa'),
+					pv = el.data('pv');
+			if (!pv) {
+				pv = el.val();
+			}
+
+			var apa = pa.toString().split(','),
+					apv = pv.toString().split(',');
+			for (var i = 0; i < apa.length; i++) {
+				u = _url(u, apa[i], apv[i]);
+			}
+
+			window.location.href = u;
+		}
+
+		function _url(u, pa, pv) {
+			var i = u.indexOf('?');
+
+			if (i == -1) {
+				u += '?' + encodeURIComponent(pa) + '=' + encodeURIComponent(pv);
+			} else {
+				var qp = new QP(u);
+
+				u = u.substring(0, i) + '?' + encodeURIComponent(pa) + '=' + encodeURIComponent(pv);
+
+				for (var ia in qp) {
+					if (ia != pa) {
+						u += '&' + encodeURIComponent(ia) + '=' + encodeURIComponent(qp[ia]);
+					}
+				}
+			}
+
+			return u;
+		}
+	</SCRIPT>
+	<script src="themes/68ecshopcom_360buy/css/index/js/jquery.slidebox.min.js" type="text/javascript"></script>
+	<script>
+		var mySwiper = new Swiper('.swiper-container',{
+			pagination: '.pagination',
+			loop:true,
+			autoplay:5000,
+			autoplayDisableOnInteraction:false,
+			grabCursor: true,
+			paginationClickable: true
+		})
+		$('.arrow-left').on('click', function(e){
+			e.preventDefault()
+			mySwiper.swipePrev()
+		})
+		$('.arrow-right').on('click', function(e){
+			e.preventDefault()
+			mySwiper.swipeNext()
+		})
+	</script>
+	<script>
+		var
+				g_emptyguid = '00000000-0000-0000-0000-000000000000',
+				g_checkmessageDoing = false,
+				g_checkmessageInterval = 30000;
+
+		var User = (function () {
+			function User(id, no, name, email, popup) {
+				this.ID = id || g_emptyguid;
+			}
+			User.prototype.isLogin = function () {
+				return this.ID != g_emptyguid;
+			};
+			return User;
+		})();
+		var Jyeoo = (function () {
+			function Jyeoo() {
+				this.user = new User();
+			}
+			Jyeoo.prototype.setUser = function (id, no, name, email, popup) {
+				this.user = new User(id, no, name, email, popup);
+			};
+			Jyeoo.prototype.isLogin = function () {
+				return this.user.isLogin();
+			};
+			Jyeoo.prototype.isPopup = function () {
+				return this.user.isPopup();
+			};
+			return Jyeoo;
+		})();
+
+		var jyeoo = new Jyeoo();
+		(function (b) {
+			var l = "function",
+					f = "type",
+					n = ":text,:password,:search,textarea";
+		})(jQuery);;
+
+
+
+
+		function starCheckMessage() {
+			if (!g_checkmessageDoing && jyeoo.isLogin() && jyeoo.isPopup()) {
+				$('#divMsg').hide('slow');
+				window.setTimeout(_checkMessage, g_checkmessageInterval);
+			}
+		}
+
+
+
+		(function (factory) {
+			if (typeof define === 'function' && define.amd) {
+				define(['jquery'], factory);
+			} else if (typeof exports === 'object') {
+				factory(require('jquery'));
+			} else {
+				factory(jQuery);
+			}
+		}(function ($) {
+			var pluses = /\+/g;
+
+			function encode(s) {
+				return config.raw ? s : encodeURIComponent(s);
+			}
+
+			function decode(s) {
+				return config.raw ? s : decodeURIComponent(s);
+			}
+
+			function stringifyCookieValue(value) {
+				return encode(config.json ? JSON.stringify(value) : String(value));
+			}
+
+
+
+			function read(s, converter) {
+				var value = config.raw ? s : parseCookieValue(s);
+				return $.isFunction(converter) ? converter(value) : value;
+			}
+			var config = $.cookie = function (key, value, options) {
+				if (value !== undefined && !$.isFunction(value)) {
+					options = $.extend({}, config.defaults, options);
+					if (typeof options.expires === 'number') {
+						var days = options.expires,
+								t = options.expires = new Date();
+						t.setTime(+t + days * 864e+5);
+					}
+					return (document.cookie = [encode(key), '=', stringifyCookieValue(value), options.expires ? '; expires=' + options.expires.toUTCString() : '', options.path ? '; path=' + options.path : '', options.domain ? '; domain=' + options.domain : '', options.secure ? '; secure' : ''].join(''));
+				}
+			};
+			config.defaults = {};
+		}));
+
+
+
+		function initLayout(id) {
+			try {
+				$("#" + id).focus();
+				$("#mathmlHelper").MathSearch(null, function (str) {
+					$("#" + id).val(str);
+					$("input.JYE_QUES").click();
+				});
+			} catch (e) {}
+			$('a.return-top').hide();
+			$(window).scroll(function () {
+				if ($(this).scrollTop() == 0) {
+					$('a.return-top').hide();
+				} else {
+					$('a.return-top').show();
+				}
+			});
+			$.cookie('JYERN', Math.random());
+		}
+	</script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="themes/68ecshopcom_360buy/css/index/js/bootstrap.min.js"></script>
+	<script src="themes/68ecshopcom_360buy/css/index/js/jquery.ui.js" ></script>
+	<script src="themes/68ecshopcom_360buy/css/index/js/jquery.validation.min.js" ></script>
+	<script type="text/javascript" src="themes/68ecshopcom_360buy/css/index/js/layer.js"></script>
+
+	<!-----footer------>
+	<!-- #BeginLibraryItem "/library/page_footer_index.lbi" --><!-- #EndLibraryItem -->
+	<script>
+
+		$(function(){
+			if(member_id==0) return;
+
+			$.ajax({
+				url:'//member.mytim.cn/chat/unread?memberId='+member_id,
+				dataType:"jsonp",
+				jsonp:"callback",
+				success:function(data){
+
+				}
+			});
+
+		})
+
+
+
+		function callback(data){
+			var data = $.parseJSON(data);
+			if (data.result.to == "false") {
+				return;
+			}
+			var  mxstr='<a target="_blank" href="//member.mytim.cn/chat/home?tab=1&to='+data.result.to+'">麦信</a><em style="background-color: #ff0000; border-radius:7px 7px 7px 0px; font-style:normal;color: #fff; float: left;font-size: 12px; line-height: 12px;margin-top: 8px; min-width: 12px; overflow:hidden; padding:1px 2px; text-align: center;z-index:1;">'+data.result.totalUnRead+'</em>';
+			$("#mxlilogin").html(mxstr);
+
+		}
+	</script>
+	<script>
+
+		$("#colse-nav").click(function (){
+			$("#rzc-xuanhu").hide();
+		})
+
+
+
+
+
+
+		function loginFun(){
+			layer.load(2, { shade: [0.2,'#999999']});
+			$.ajax({
+				type: "post",
+				url: '//www.mytim.cn/front/doLogin',
+				data: {username:$("#username").val(),password:$("#password").val()},
+				success:function(result) {
+					var data = $.parseJSON(result);
+					if(data.status==1){
+						window.location.href= '//www.mytim.cn/';
+					}else{
+						layer.msg(data.message, {icon : 2});
+						//$("#submitBtn").removeAttr("disabled");
+						//关闭进度条
+						layer.closeAll('loading');
+					}
+				}
+			});
+
+		}
+
+	</script>
+
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "//hm.baidu.com/hm.js?291ad78f3d0a17e3790a9b5206d2ca55";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+	<script>
+		var leftlei=$('#leftlei');
+		$(window).scroll(function(){
+			var winheight=$(this).scrollTop();
+			if(winheight>=leftlei.height()){
+				leftlei.attr('style','display:block')
+			}else{
+				leftlei.attr('style','display:none')
+			}
+		});
+
+	</script>
+</body>
+</html>

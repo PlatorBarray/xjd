@@ -1,0 +1,332 @@
+2.6以上的静态规则在下方~
+
+在.htaccess中增加：
+
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^download\.html$ plugin.php?id=mini_download:index
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^download_([0-9]+)\.html$ plugin.php?id=mini_download:index&mod=view&itemid=$1
+
+
+
+
+
+
+在.httpd.ini中增加：
+RewriteRule ^(.*)/download\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index
+RewriteRule ^(.*)/download_([0-9]+)\.html(\?(.*))*$ $1/plugin\.php\?id=mini_download:index&mod=view&itemid=$2
+
+
+
+
+
+
+nginx规则:
+rewrite ^([^\.]*)/download.html$ $1/plugin.php?id=mini_download:index last;
+rewrite ^([^\.]*)/download_([0-9]+).html$ $1/plugin.php?id=mini_download:index&mod=view&itemid=$2 last;
+
+
+
+
+============以上为2.5版，以下为2.6版本的规则，如有错误请反馈，谢谢。============
+12-2-19更新
+
+Apache Web Server ：
+# 简易下载强化开始
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down\.html$ plugin.php?id=mini_download:index
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_tj\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&nsd=$3&types=tj
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_moren\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&nsd=$3&types=time
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_([0-9]+)\.html$ plugin.php?id=mini_download:index&mod=view&sid=$1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_([0-9]+)_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&nsd=$3
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_user\.html$ plugin.php?id=mini_download:mini_download_user
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_user_add\.html$ plugin.php?id=mini_download:mini_download_user&p=add
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_user_guize\.html$ plugin.php?id=mini_download:mini_download_user&p=guize
+# 简易下载强化结束
+
+
+
+
+Nginx Web Server规则
+
+rewrite ^([^\.]*)/down.html$ $1/plugin.php?id=mini_download:index last;
+rewrite ^([^\.]*)/down_tj\.html$ $1/plugin.php?id=mini_download:index:index&c=$2&d=$3&nsd=$4&types=tj last;
+rewrite ^([^\.]*)/down_moren\.html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&nsd=$4&types=time last;
+rewrite ^([^\.]*)/down_([0-9]+)\.html$ $1/plugin.php?id=mini_download:index&mod=view&sid=$2 last;
+rewrite ^([^\.]*)/down_([0-9]+)_([0-9]+)\.html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3 last;
+rewrite ^([^\.]*)/down_([0-9]+)_([0-9]+)_([0-9]+)\.html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&nsd=$4 last;
+rewrite ^([^\.]*)/down_user\.html$ $1/plugin.php?id=mini_download:mini_download_user last;
+rewrite ^([^\.]*)/down_user_add\.html$ $1/plugin.php?id=mini_download:mini_download_user&p=add last;
+rewrite ^([^\.]*)/down_user_guize\.html$ $1/plugin.php?id=mini_download:mini_download_user&p=guize last;
+
+IIS Web Server规则 iis6
+
+RewriteRule ^(.*)/down\.html\?*(.*)$ $1/plugin\.php\?id=download:index
+RewriteRule ^(.*)/down_tj\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&nsd=$4&types=tj
+RewriteRule ^(.*)/down_moren\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&nsd=$4&types=moren
+RewriteRule ^(.*)/down_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&mod=view&sid=$2
+RewriteRule ^(.*)/down_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3
+RewriteRule ^(.*)/down_([0-9]+)_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&nsd=$4
+RewriteRule ^(.*)/down_user\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:mini_download_user
+RewriteRule ^(.*)/down_user_add\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:mini_download_user&p=add
+RewriteRule ^(.*)/down_user_guize\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:mini_download_user&p=guize
+
+
+===============================================================
+
+=======================V3.0以上版本静态规则=============================
+4月8日更新
+
+Apache Web Server ：
+# 简易下载强化
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down\.html$ plugin.php?id=mini_download:index&mod=default
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_([0-9]+)\.html$ plugin.php?id=mini_download:index&mod=view&sid=$1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^freedown_([0-9]+)\.html$ plugin.php?id=mini_download:index&mod=freedown&sid=$1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^paydown_([0-9]+)\.html$ plugin.php?id=mini_download:index&mod=download&sid=$1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_list\.html$ plugin.php?id=mini_download:index&types=time
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_list_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&types=time
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_list_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&types=time
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_list_([0-9]+)_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&nsd=$3&types=time
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_dx_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&px=d
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_dx_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&px=d
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_dx_([0-9]+)_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&nsd=$3&px=d
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_tj_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&types=tj
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_tj_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&types=tj
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_tj_([0-9]+)_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&nsd=$3&types=tj
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_pf_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&ps=f
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_pf_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&ps=f
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_pf_([0-9]+)_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&nsd=$3&ps=f
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_freelist_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&types=free
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_freelist_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&types=free
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_freelist_([0-9]+)_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&nsd=$3&types=free
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_paylist_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&types=pay
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_paylist_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&types=pay
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_paylist_([0-9]+)_([0-9]+)_([0-9]+)\.html$ plugin.php?id=mini_download:index&c=$1&d=$2&nsd=$3&types=pay
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_user_consumption\.html$ plugin.php?id=mini_download:mini_download_user&p=consumption
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_user\.html$ plugin.php?id=mini_download:mini_download_user
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_user_add\.html$ plugin.php?id=mini_download:mini_download_user&p=add
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_user_guize\.html$ plugin.php?id=mini_download:mini_download_user&p=guize
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down_user_favorites\.html$ plugin.php?id=mini_download:mini_download_user&p=favorites
+# 简易下载强化
+
+
+Nginx Web Server规则
+
+rewrite ^([^\.]*)/down.html$ $1/plugin.php?id=mini_download:index&mod=default last;
+rewrite ^([^\.]*)/down_list.html$ $1/plugin.php?id=mini_download:index&types=time last;
+rewrite ^([^\.]*)/down_list_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&types=time last;
+rewrite ^([^\.]*)/down_list_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&types=time last;
+rewrite ^([^\.]*)/down_list_([0-9]+)_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&nsd=$4&types=time last;
+rewrite ^([^\.]*)/down_dx_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&px=d last;
+rewrite ^([^\.]*)/down_dx_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&px=d last;
+rewrite ^([^\.]*)/down_dx_([0-9]+)_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&nsd=$4&px=d last;
+rewrite ^([^\.]*)/down_tj_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&types=tj last;
+rewrite ^([^\.]*)/down_tj_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&types=tj last;
+rewrite ^([^\.]*)/down_tj_([0-9]+)_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&nsd=$4&types=tj last;
+rewrite ^([^\.]*)/down_pf_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&ps=f last;
+rewrite ^([^\.]*)/down_pf_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&ps=f last;
+rewrite ^([^\.]*)/down_pf_([0-9]+)_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&nsd=$4&ps=f last;
+rewrite ^([^\.]*)/down_([0-9]+)\.html$ $1/plugin.php?id=mini_download:index&mod=view&sid=$2 last;
+rewrite ^([^\.]*)/freedown_([0-9]+)\.html$ $1/plugin.php?id=mini_download:index&mod=freedown&sid=$2 last;
+rewrite ^([^\.]*)/paydown_([0-9]+)\.html$ $1/plugin.php?id=mini_download:index&mod=download&sid=$2 last;
+rewrite ^([^\.]*)/down_freelist_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&types=free last;
+rewrite ^([^\.]*)/down_freelist_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&types=free last;
+rewrite ^([^\.]*)/down_freelist_([0-9]+)_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&nsd=$4&types=free last;
+rewrite ^([^\.]*)/down_paylist_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&types=pay last;
+rewrite ^([^\.]*)/down_paylist_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&types=pay last;
+rewrite ^([^\.]*)/down_paylist_([0-9]+)_([0-9]+)_([0-9]+).html$ $1/plugin.php?id=mini_download:index&c=$2&d=$3&nsd=$4&types=pay last;
+rewrite ^([^\.]*)/down_user_consumption\.html$ $1/plugin.php?id=mini_download:mini_download_user&p=consumption last;
+rewrite ^([^\.]*)/down_user\.html$ $1/plugin.php?id=mini_download:mini_download_user last;
+rewrite ^([^\.]*)/down_user_add\.html$ $1/plugin.php?id=mini_download:mini_download_user&p=add last;
+rewrite ^([^\.]*)/down_user_guize\.html$ $1/plugin.php?id=mini_download:mini_download_user&p=guize last;
+rewrite ^([^\.]*)/down_user_favorites\.html$ $1/plugin.php?id=mini_download:mini_download_user&p=favorites last;
+
+
+IIS6规则
+
+RewriteRule ^(.*)/down\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&mod=default
+RewriteRule ^(.*)/down_list\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&types=time
+RewriteRule ^(.*)/down_list_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&types=time 
+RewriteRule ^(.*)/down_list_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&types=time
+RewriteRule ^(.*)/down_list_([0-9]+)_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&nsd=$4&types=time
+RewriteRule ^(.*)/down_dx_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&px=d 
+RewriteRule ^(.*)/down_dx_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&px=d
+RewriteRule ^(.*)/down_dx_([0-9]+)_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&nsd=$4&px=d
+RewriteRule ^(.*)/down_tj_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&types=tj 
+RewriteRule ^(.*)/down_tj_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&types=tj
+RewriteRule ^(.*)/down_tj_([0-9]+)_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&nsd=$4&types=tj
+RewriteRule ^(.*)/down_pf_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&ps=f 
+RewriteRule ^(.*)/down_pf_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&ps=f
+RewriteRule ^(.*)/down_pf_([0-9]+)_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&nsd=$4&ps=f
+RewriteRule ^(.*)/down_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&mod=view&sid=$2
+RewriteRule ^(.*)/freedown_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&mod=freedown&sid=$2
+RewriteRule ^(.*)/paydown_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&mod=download&sid=$2
+RewriteRule ^(.*)/down_freelist_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&types=free 
+RewriteRule ^(.*)/down_freelist_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&types=free
+RewriteRule ^(.*)/down_freelist_([0-9]+)_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&nsd=$4&types=free
+RewriteRule ^(.*)/down_paylist_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&types=pay
+RewriteRule ^(.*)/down_paylist_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&types=pay
+RewriteRule ^(.*)/down_paylist_([0-9]+)_([0-9]+)_([0-9]+)\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:index&c=$2&d=$3&nsd=$4&types=pay
+RewriteRule ^(.*)/down_user_consumption\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:mini_download_user&p=consumption
+RewriteRule ^(.*)/down_user\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:mini_download_user
+RewriteRule ^(.*)/down_user_add\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:mini_download_user&p=add
+RewriteRule ^(.*)/down_user_guize\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:mini_download_user&p=guize
+RewriteRule ^(.*)/down_user_favorites\.html\?*(.*)$ $1/plugin\.php\?id=mini_download:mini_download_user&p=favorites
+
+
+IIS7
+
+<rule name="minidownload1">
+<match url="^(.*/)*down.html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;mod=default" />
+</rule>
+<rule name="minidownload2-1">
+<match url="^(.*/)*down_list.html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;types=time" />
+</rule>
+<rule name="minidownload2-2">
+<match url="^(.*/)*down_list_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;types=time" />
+</rule>
+<rule name="minidownload2-3">
+<match url="^(.*/)*down_list_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;types=time" />
+</rule>
+<rule name="minidownload2-4">
+<match url="^(.*/)*down_list_([0-9]+)_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;nsd={R:4}&amp;types=time" />
+</rule>
+<rule name="minidownload3-1">
+<match url="^(.*/)*down_tj_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;types=tj" />
+</rule>
+<rule name="minidownload3-2">
+<match url="^(.*/)*down_tj_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;types=tj" />
+</rule>
+<rule name="minidownload3-3">
+<match url="^(.*/)*down_tj_([0-9]+)_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;nsd={R:4}&amp;types=tj" />
+</rule>
+<rule name="minidownload4-1">
+<match url="^(.*/)*down_dx_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;px=d" />
+</rule>
+<rule name="minidownload4-2">
+<match url="^(.*/)*down_dx_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;px=d" />
+</rule>
+<rule name="minidownload4-3">
+<match url="^(.*/)*down_dx_([0-9]+)_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;nsd={R:4}&amp;px=d" />
+</rule>
+<rule name="minidownload5-1">
+<match url="^(.*/)*down_pf_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;ps=f" />
+</rule>
+<rule name="minidownload5-2">
+<match url="^(.*/)*down_pf_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;ps=f" />
+</rule>
+<rule name="minidownload5-3">
+<match url="^(.*/)*down_pf_([0-9]+)_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;nsd={R:4}&amp;ps=f" />
+</rule>
+<rule name="minidownload5-4">
+<match url="^(.*/)*down_freelist_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;types=free" />
+</rule>
+<rule name="minidownload5-5">
+<match url="^(.*/)*down_freelist_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;types=free" />
+</rule>
+<rule name="minidownload5-6">
+<match url="^(.*/)*down_freelist_([0-9]+)_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;nsd={R:4}&amp;types=free" />
+</rule>
+<rule name="minidownload5-7">
+<match url="^(.*/)*down_paylist_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;types=pay" />
+</rule>
+<rule name="minidownload5-8">
+<match url="^(.*/)*down_paylist_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;types=pay" />
+</rule>
+<rule name="minidownload5-9">
+<match url="^(.*/)*down_paylist_([0-9]+)_([0-9]+)_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;c={R:2}&amp;d={R:3}&amp;nsd={R:4}&amp;types=pay" />
+</rule>
+<rule name="minidownload7-1">
+<match url="^(.*/)*down_user_guize.html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:mini_download_user&amp;p=guize" />
+</rule>
+<rule name="minidownload6-1">
+<match url="^(.*/)*down_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;mod=view&amp;sid={R:2}" />
+</rule>
+<rule name="minidownload6-2">
+<match url="^(.*/)*freedown_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;mod=freedown&amp;sid={R:2}" />
+</rule>
+<rule name="minidownload6-3">
+<match url="^(.*/)*paydown_([0-9]+).html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:index&amp;mod=download&amp;sid={R:2}" />
+</rule>
+<rule name="minidownload7">
+<match url="^(.*/)*down_user.html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:mini_download_user" />
+</rule>
+<rule name="minidownload8">
+<match url="^(.*/)*down_user_add.html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:mini_download_user&amp;p=add" />
+</rule>
+<rule name="minidownload9">
+<match url="^(.*/)*down_user_guize.html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:mini_download_user&amp;p=guize" />
+</rule>
+
+<rule name="minidownload10">
+<match url="^(.*/)*down_user_favorites.html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:mini_download_user&amp;p=favorites" />
+</rule>
+<rule name="minidownload11">
+<match url="^(.*/)*down_user_consumption.html\?*(.*)$" />
+<action type="Rewrite" url="{R:1}/plugin.php\?id=mini_download:mini_download_user&amp;p=consumption" />
+</rule>

@@ -1,0 +1,32 @@
+<!-- $Id: category_flashimg_list.htm 17019 2010-01-29 10:10:34Z liuhui $ -->
+
+{include file="pageheader.htm"}
+
+<form method="post" action="" name="listForm">
+<!-- start ad position list -->
+<div class="list-div" id="listDiv">
+
+
+<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+  <tr>
+    <th>轮播图片地址</th>
+    <th>图片预览</th>
+    <th>{$lang.handler}</th>
+  </tr>
+  {foreach from=$ad_img item=flashimg}
+  <tr align="center" >
+    <td width="35%">{$flashimg.img_url}</td>
+    <td width="10%" align="center"><img src="{$flashimg.img_url}" width="100"></td>
+    <td width="20%" align="center">
+      <a href="category_flashimg.php?act=adedit&cat_id={$cate_id}&id={$flashimg.id}" title="编辑"><img src="images/icon_edit.gif" width="16" height="16" border="0" /></a>
+      <a href="category_flashimg.php?act=adremove&cat_id={$cate_id}&id={$flashimg.id}" onclick="return confirm('你确实要删除该图片吗？');" title="删除这张轮播图片"><img src="images/icon_drop.gif" width="16" height="16" border="0" /></a>
+    </td>
+  </tr>
+  {/foreach}
+</table>
+
+</div>
+</form>
+
+
+{include file="pagefooter.htm"}
