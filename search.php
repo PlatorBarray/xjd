@@ -141,6 +141,7 @@ if ($_REQUEST['act'] == 'advanced_search')
 /*------------------------------------------------------ */
 else
 {
+
     $_REQUEST['keywords']   = !empty($_REQUEST['keywords'])   ? htmlspecialchars(trim($_REQUEST['keywords']))     : '';
     $_REQUEST['brand']      = !empty($_REQUEST['brand'])      ? intval($_REQUEST['brand'])      : 0;
     $_REQUEST['category']   = !empty($_REQUEST['category'])   ? intval($_REQUEST['category'])   : 0;
@@ -430,7 +431,7 @@ else
 //	$ts_string_array = array("*","/");
         $ts_string_array = array("*","/",".");
         /* 代码修改 By  www.68ecshop.com End */
-
+        require ( "./includes/ip.php" );
     /* 查询商品 */
     $sql = "SELECT g.goods_id, g.goods_name, g.market_price, g.click_count, g.goods_number, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ".
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
@@ -439,14 +440,13 @@ else
             "LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
                     "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
             "WHERE g.is_delete = 0 AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_virtual=0 $attr_in $categories ".
-                "AND (( 1 " . $keywords . $brand . $min_price . $max_price . $intro . $outstock . " ) ".$tag_where." ) " .
+                "AND (( 1 " . $keywords . $brand . $min_price . $max_price . $intro . $outstock . " ) ".$tag_where." ) and city like '%".$city."%' " .
             
 			"ORDER BY if(instr(goods_name,'".$_REQUEST['keywords']."') >0,1,0) desc , $sort $order";
 
-    
     }
     /* fulltext_search_add_START_www.68ecshop.com */
-    
+
     if($_CFG['fulltext_search'] == '1'){
         require ( "./includes/sphinxapi.php" );
         $s = new SphinxClient();
@@ -454,6 +454,7 @@ else
         $s->setLimits (0,1000);
         //$s->SetMatchMode ( SPH_MATCH_ANY);  // 分词
 		$result = $s->Query($_REQUEST['keywords'],'goods');
+
             if($result){
 		$idarray = array_keys($result['matches']);
 		if(empty($idarray)){
@@ -489,6 +490,7 @@ else
 			}
 		}
 	}
+
 	if($_REQUEST['keyword_zm'])
 	{
 		$smarty->assign('beizhuxinxi', '关键词<font color=#cc0000>'.$_REQUEST['keyword_zm'].'</font>搜索结果为零，<br>但是我们为您匹配到了相关关键词<font color=#cc0000>'.$_REQUEST['keywords'].'</font>，下面是它的查询结果！');
@@ -498,10 +500,9 @@ else
     {
         $page = $max_page;
     }
-        
-        
+
         //$sqls = "select * from ecs_goods where goods_id in ({$ids})";
-        $sql = "SELECT g.goods_id, g.goods_name, g.market_price, g.click_count, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ".
+        echo $sql = "SELECT g.goods_id, g.goods_name, g.market_price, g.click_count, g.is_new, g.is_best, g.is_hot, g.shop_price AS org_price, ".
                     "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
                     "g.promote_price, g.promote_start_date, g.promote_end_date, g.goods_thumb, g.goods_img, g.goods_brief, g.goods_type ".
                 "FROM " .$ecs->table('goods'). " AS g ".
@@ -520,7 +521,7 @@ else
             exit;
         }
     }
-	
+
     /* fulltext_search_add_END_www.68ecshop.com */
     
     $res = $db->SelectLimit($sql, $size, ($page - 1) * $size);
@@ -622,6 +623,11 @@ else
         {
             $arr[] = array();
         }
+    }
+    if(!empty($city))
+    {
+        $smarty->assign('is_position',1);
+        $smarty->assign('city_pos',$city);
     }
     $smarty->assign('goods_list', $arr);
     $smarty->assign('category',   $category);

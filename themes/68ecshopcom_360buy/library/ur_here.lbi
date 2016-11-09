@@ -1,7 +1,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <div class="w">
-  <div class="breadcrumb clearfix">{$ur_here}</div>
+  <div class="breadcrumb clearfix">
+  {$ur_here}
+   {if $is_position eq 1}
+    <span class="last" style="margin-left:10px">您所在的位置：{$city_pos}</span>
+    {/if}
+  </div>
+
+
 </div>
+
 <div class="blank"></div>
 <script>
 $(function(){
