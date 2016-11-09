@@ -154,7 +154,7 @@
 				<div class="navleft-tab">
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"> <a href="#notice" data-toggle="tab"> 公告 </a> </li>
-						<li><a href="#comprador" data-toggle="tab">买家入口</a></li>
+						<li><a href="#comprador" data-toggle="tab">卖家入口</a></li>
 						<!--<li> <a href="#vendor" data-toggle="tab">卖家入口 </a> </li>-->
 					</ul>
 

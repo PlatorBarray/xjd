@@ -634,7 +634,7 @@ i, cite,em, strong, th {
 	display:block;
 	width:150px;
 	height:70px;
-	background:url(../images/common/logo_right.gif)	no-repeat center center;
+	/*background:url(../images/common/logo_right.gif)	no-repeat center center;*/
 }
 /******头部搜索*******/
 .header .mall-search {
