@@ -28,7 +28,7 @@ if(!defined('ADMIN_PATH'))
 {
 define('ADMIN_PATH','admin');
 }
-
+ff
 define('AUTH_KEY', 'this is a key');
 
 define('OLD_AUTH_KEY', '');
