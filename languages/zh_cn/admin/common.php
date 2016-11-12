@@ -13,8 +13,8 @@
  * $Id: common.php 17217 2011-01-19 06:29:08Z liubo $
  */
 $_LANG['app_name'] = 'ECSHOP';
-$_LANG['cp_home'] = '管理中心';
-$_LANG['copyright'] = '版权所有 &copy; 2008-2015 秦皇岛商之翼网络科技有限公司，并保留所有权利。';
+$_LANG['cp_home'] = '爱果然管理中心';
+$_LANG['copyright'] = '版权所有 &copy; 爱果然订单农业网并保留所有权利。';
 $_LANG['query_info'] = '共执行 %d 个查询，用时 %s 秒';
 $_LANG['memory_info'] = '，内存占用 %0.3f MB';
 $_LANG['gzip_enabled'] = '，Gzip 已启用';
