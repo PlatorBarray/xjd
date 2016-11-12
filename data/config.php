@@ -1,7 +1,7 @@
 <?php
-// database host
+// database hostd
 $db_host   = "localhost:3306";
-
+ 
 // database name
 $db_name   = "ling";
 
