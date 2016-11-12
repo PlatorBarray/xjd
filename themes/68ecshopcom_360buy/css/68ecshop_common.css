@@ -746,7 +746,7 @@ i, cite,em, strong, th {
 	height: 16px;
 	*height:14px;
 	overflow: hidden;
-	width: 100%;
+	width: 110%;
 }
 .header .mall-search .hot-query li {
 	display: inline-block;
